@@ -25,6 +25,6 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector2 vector = horisontalMove * Speed;
         //Debug.Log("Move: " + vector);
-        rigidbody.AddForce(vector);
+        rigidbody.velocity += vector;
     }
 }
