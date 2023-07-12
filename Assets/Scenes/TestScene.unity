@@ -293,7 +293,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 1
-  target: {fileID: 1551877168}
+  Target: {fileID: 1551877168}
+  Jumpynes: 0.01
+  JumpForce: 200
 --- !u!70 &374160491
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -456,7 +458,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 5
-  target: {fileID: 1551877168}
+  Target: {fileID: 1551877168}
+  Jumpynes: 0.02
+  JumpForce: 200
 --- !u!70 &388320733
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -619,7 +623,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 2
-  target: {fileID: 1551877168}
+  Target: {fileID: 1551877168}
+  Jumpynes: 0.01
+  JumpForce: 200
 --- !u!70 &593950455
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

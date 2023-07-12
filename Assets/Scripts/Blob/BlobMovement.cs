@@ -5,9 +5,12 @@ using UnityEngine;
 public class Blobmovement : MonoBehaviour
 {
     [SerializeField] float Speed;
-    [SerializeField] GameObject target;
+    [SerializeField] GameObject Target;
+    [SerializeField] float Jumpynes;
+    [SerializeField] float JumpForce;
 
     Rigidbody2D rigidbody;
+    float jumpProbability = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -22,8 +25,19 @@ public class Blobmovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector2 vector = target.transform.position - transform.position;
-        //Debug.Log("Move: " + vector);
+        Vector2 vector = Target.transform.position - transform.position;
         rigidbody.velocity = new Vector2((vector * Speed).x, rigidbody.velocity.y);
+        jumpProbability += Jumpynes * Time.fixedDeltaTime;
+
+        if(Random.value < jumpProbability)
+        {
+            Jump();
+            jumpProbability = 0;
+        }
+    }
+
+    void Jump()
+    {
+        rigidbody.AddForce(new Vector2 (0f, JumpForce));
     }
 }
