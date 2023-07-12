@@ -292,7 +292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 177bc41038ad25243a461c2d0ef0d72d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 0.2
+  Speed: 1
   target: {fileID: 1551877168}
 --- !u!70 &374160491
 CapsuleCollider2D:
@@ -455,7 +455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 177bc41038ad25243a461c2d0ef0d72d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 1
+  Speed: 5
   target: {fileID: 1551877168}
 --- !u!70 &388320733
 CapsuleCollider2D:
@@ -618,7 +618,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 177bc41038ad25243a461c2d0ef0d72d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 0.5
+  Speed: 2
   target: {fileID: 1551877168}
 --- !u!70 &593950455
 CapsuleCollider2D:
@@ -1040,7 +1040,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89bb4942c1f95394cb1bd185181f7928, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 1
+  Speed: 10
 --- !u!1 &1857480969
 GameObject:
   m_ObjectHideFlags: 0

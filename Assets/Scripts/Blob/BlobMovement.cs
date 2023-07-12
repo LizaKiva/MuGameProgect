@@ -24,6 +24,6 @@ public class Blobmovement : MonoBehaviour
     {
         Vector2 vector = target.transform.position - transform.position;
         //Debug.Log("Move: " + vector);
-        rigidbody.velocity += vector * Speed;
+        rigidbody.velocity = new Vector2((vector * Speed).x, rigidbody.velocity.y);
     }
 }

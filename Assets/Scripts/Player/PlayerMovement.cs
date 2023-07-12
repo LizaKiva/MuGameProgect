@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float Speed;
 
-    Vector2 horisontalMove = new Vector2(0,0);
+    float horisontalMove = 0;
     Rigidbody2D rigidbody;
 
     // Start is called before the first frame update
@@ -18,13 +18,11 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        horisontalMove = new Vector2(Input.GetAxis("Horizontal"), 0);
+        horisontalMove = Input.GetAxis("Horizontal");
     }
 
     void FixedUpdate()
     {
-        Vector2 vector = horisontalMove * Speed;
-        //Debug.Log("Move: " + vector);
-        rigidbody.velocity += vector;
+        rigidbody.velocity = new Vector2(horisontalMove * Speed, rigidbody.velocity.y);
     }
 }
