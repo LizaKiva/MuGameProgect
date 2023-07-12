@@ -5,12 +5,17 @@ using UnityEngine;
 public class Blobmovement : MonoBehaviour
 {
     [SerializeField] float Speed;
-    [SerializeField] GameObject Target;
     [SerializeField] float Jumpynes;
     [SerializeField] float JumpForce;
+    [SerializeField] float GroundCheckRadius;
 
-    Rigidbody2D rigidbody;
+    [SerializeField] GameObject Target;
+    [SerializeField] Transform GroundCheckObject;
+    [SerializeField] LayerMask WhatIsGroud;
+
     float jumpProbability = 0;
+    bool isGrounded = false;
+    Rigidbody2D rigidbody;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +30,8 @@ public class Blobmovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        isGrounded = Physics2D.OverlapCircle(GroundCheckObject.position, GroundCheckRadius, WhatIsGroud);
+
         Vector2 vector = Target.transform.position - transform.position;
         rigidbody.velocity = new Vector2((vector * Speed).x, rigidbody.velocity.y);
         jumpProbability += Jumpynes * Time.fixedDeltaTime;
@@ -38,6 +45,9 @@ public class Blobmovement : MonoBehaviour
 
     void Jump()
     {
-        rigidbody.AddForce(new Vector2 (0f, JumpForce));
+        if (isGrounded)
+        {
+            rigidbody.velocity += Vector2.up * JumpForce;
+        }
     }
 }
