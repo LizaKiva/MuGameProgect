@@ -292,7 +292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 177bc41038ad25243a461c2d0ef0d72d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 2
+  Speed: 0.2
   target: {fileID: 1551877168}
 --- !u!70 &374160491
 CapsuleCollider2D:
@@ -455,7 +455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 177bc41038ad25243a461c2d0ef0d72d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 10
+  Speed: 1
   target: {fileID: 1551877168}
 --- !u!70 &388320733
 CapsuleCollider2D:
@@ -618,7 +618,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 177bc41038ad25243a461c2d0ef0d72d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 5
+  Speed: 0.5
   target: {fileID: 1551877168}
 --- !u!70 &593950455
 CapsuleCollider2D:

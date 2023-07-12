@@ -24,6 +24,6 @@ public class Blobmovement : MonoBehaviour
     {
         Vector2 vector = target.transform.position - transform.position;
         //Debug.Log("Move: " + vector);
-        rigidbody.AddForce(vector * Speed);
+        rigidbody.velocity += vector * Speed;
     }
 }
