@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Blobmovement : MonoBehaviour
@@ -8,6 +9,8 @@ public class Blobmovement : MonoBehaviour
     [SerializeField] float Jumpynes;
     [SerializeField] float JumpForce;
     [SerializeField] float GroundCheckRadius;
+    [SerializeField] float OuterRadius;
+    [SerializeField] float InnerRadius;
 
     [SerializeField] GameObject Target;
     [SerializeField] Transform GroundCheckObject;
@@ -15,11 +18,16 @@ public class Blobmovement : MonoBehaviour
 
     float jumpProbability = 0;
     bool isGrounded = false;
+    bool isFlying = false;
     Rigidbody2D rigidbody;
+    Collider2D collider;
+
+    float FLY_COEFICENT = (float)(1 / 1.3); // 1.3 is just sligtly smaller than sqrt(2)
 
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
+        collider = GetComponent<Collider2D>();
     }
 
     void Update()
@@ -28,16 +36,36 @@ public class Blobmovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        isGrounded = Physics2D.OverlapCircle(GroundCheckObject.position, GroundCheckRadius, WhatIsGroud);
-
         Vector2 vector = Target.transform.position - transform.position;
-        rigidbody.velocity = new Vector2((vector * Speed).x, rigidbody.velocity.y);
-        jumpProbability += Jumpynes * Time.fixedDeltaTime;
 
-        if(Random.value < jumpProbability)
+        if(!isFlying && vector.magnitude > OuterRadius)
         {
-            Jump();
-            jumpProbability = 0;
+            isFlying = true;
+            collider.enabled = false;
+        }
+
+        if(vector.magnitude < InnerRadius)
+        {
+            isFlying = false;
+            collider.enabled = true;
+        }
+
+        if (isFlying)
+        {
+            rigidbody.velocity = vector * Speed * FLY_COEFICENT;
+        }
+        else
+        {
+            isGrounded = Physics2D.OverlapCircle(GroundCheckObject.position, GroundCheckRadius, WhatIsGroud);
+
+            rigidbody.velocity = new Vector2((vector * Speed).x, rigidbody.velocity.y);
+            jumpProbability += Jumpynes * Time.fixedDeltaTime;
+
+            if (Random.value < jumpProbability)
+            {
+                Jump();
+                jumpProbability = 0;
+            }
         }
     }
 
