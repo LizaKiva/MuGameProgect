@@ -48,10 +48,17 @@ public class Blobmovement : MonoBehaviour
         {
             isFlying = false;
             collider.enabled = true;
+            transform.rotation = Quaternion.identity;
         }
 
         if (isFlying)
         {
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePosition.z = 0;
+            Vector3 direction = mousePosition - transform.position;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
             rigidbody.velocity = vector * Speed * FLY_COEFICENT;
         }
         else
