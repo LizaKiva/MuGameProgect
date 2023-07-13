@@ -53,9 +53,7 @@ public class Blobmovement : MonoBehaviour
 
         if (isFlying)
         {
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Target.transform.position);
-            mousePosition.z = 0;
-            Vector3 direction = mousePosition - transform.position;
+            Vector3 direction = Target.transform.position - transform.position;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
