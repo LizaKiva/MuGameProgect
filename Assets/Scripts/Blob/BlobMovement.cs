@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Blobmovement : MonoBehaviour
+public class BlobMovement : MonoBehaviour
 {
     [SerializeField] float Speed;
     [SerializeField] float Jumpynes;
