@@ -26,16 +26,20 @@ public class ChestPrompt : MonoBehaviour
         yield return null;
     }
     
-    void OnTriggerStay(Collider other)
+    void OnTriggerStay2D(Collider2D other)
     {
-        if(other.CompareTag("Player"))
+        if(other.gameObject.CompareTag("Player"))
         {
-            if(promptLeftDelay <= 0)
+            if (promptLeftDelay <= 0)
             {
                 EnablePrompt();
+                promptLeftDelay = promptStayDelay;
                 StartCoroutine(StartCountdown());
             }
-            promptLeftDelay = promptStayDelay;
+            else
+            {
+                promptLeftDelay = promptStayDelay;
+            }
         }
     }
 
