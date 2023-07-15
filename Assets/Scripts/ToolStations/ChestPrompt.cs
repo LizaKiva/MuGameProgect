@@ -45,11 +45,13 @@ public class ChestPrompt : MonoBehaviour
 
     void EnablePrompt()
     {
+        Debug.Log("Enabled Chest prompt");
         PromptObject.SetActive(true);
     }
 
     void DisablePrompt()
     {
+        Debug.Log("Disabled Chest prompt");
         PromptObject.SetActive(false);
     }
 }
