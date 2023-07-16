@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public class MoveController : MonoBehaviour
@@ -28,7 +29,10 @@ public class MoveController : MonoBehaviour
 
     public void Run(float force)
     {
-
+        if(force > 0 && !isFacingRight)
+        {
+            Flip();
+        }
     }
 
     public void Jump()
@@ -36,9 +40,8 @@ public class MoveController : MonoBehaviour
         rigidbody.AddForce(Vector2.up * Data.JumpForce, ForceMode2D.Impulse);
     }
 
-    private void Turn()
+    private void Flip()
     {
-        //stores scale and flips the player along the x axis, 
         Vector3 scale = transform.localScale;
         scale.x *= -1;
         transform.localScale = scale;
