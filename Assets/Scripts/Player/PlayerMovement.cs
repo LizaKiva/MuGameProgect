@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] Transform GroundCheckObject;
     [SerializeField] LayerMask WhatIsGroud;
+    [SerializeField] MoveController Controller;
 
     float horisontalMove = 0;
     bool isGrounded = false;
@@ -33,7 +34,8 @@ public class PlayerMovement : MonoBehaviour
 
         if(Input.GetKey(KeyCode.Space) && isGrounded)
         {
-            rigidbody.velocity += Vector2.up * JumpForce;
+            //rigidbody.velocity += Vector2.up * JumpForce;
+            Controller.Jump();
         }
     }
 }
