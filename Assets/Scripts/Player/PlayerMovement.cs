@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] float Speed;
     [SerializeField] float GroundCheckRadius;
-    [SerializeField] float JumpForce;
-
     [SerializeField] Transform GroundCheckObject;
     [SerializeField] LayerMask WhatIsGroud;
+    [SerializeField] MoveController Controller;
 
     float horisontalMove = 0;
     bool isGrounded = false;
@@ -29,11 +27,13 @@ public class PlayerMovement : MonoBehaviour
     {
         isGrounded = Physics2D.OverlapCircle(GroundCheckObject.position, GroundCheckRadius, WhatIsGroud);
 
-        rigidbody.velocity = new Vector2(horisontalMove * Speed, rigidbody.velocity.y);
+        Controller.Run(horisontalMove);
+        //rigidbody.velocity = new Vector2(horisontalMove * Speed, rigidbody.velocity.y);
 
         if(Input.GetKey(KeyCode.Space) && isGrounded)
         {
-            rigidbody.velocity += Vector2.up * JumpForce;
+            //rigidbody.velocity += Vector2.up * JumpForce;
+            Controller.Jump();
         }
     }
 }
