@@ -474,9 +474,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89bb4942c1f95394cb1bd185181f7928, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 10
   GroundCheckRadius: 0.2
-  JumpForce: 2.5
   GroundCheckObject: {fileID: 744275317}
   WhatIsGroud:
     serializedVersion: 2
@@ -637,10 +635,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bcd996f6180c4a49905856aeadd7fda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GravityScale: 2
-  FallGravityMultiplier: 2
-  JumpForce: 4
-  Speed: 0
+  GravityScale: 3
+  FallGravityMultiplier: 3
+  JumpForce: 6
+  Speed: 10
 --- !u!1 &677891539
 GameObject:
   m_ObjectHideFlags: 0
@@ -1030,8 +1028,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1321587828}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.35, y: -3.1959, z: 0}
-  m_LocalScale: {x: 6.7657, y: 4.509428, z: 1}
+  m_LocalPosition: {x: 16.35, y: -3.5326, z: 0}
+  m_LocalScale: {x: 6.7657, y: 3.8361704, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1645,8 +1643,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2105593000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.2739, y: -4.023, z: 0}
-  m_LocalScale: {x: 13.334023, y: 2.9553604, z: 1}
+  m_LocalPosition: {x: 14.2739, y: -4.3036, z: 0}
+  m_LocalScale: {x: 13.334023, y: 2.3941376, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
