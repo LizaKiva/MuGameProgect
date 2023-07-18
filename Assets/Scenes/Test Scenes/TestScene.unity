@@ -2454,6 +2454,8 @@ GameObject:
   - component: {fileID: 1551877170}
   - component: {fileID: 1551877169}
   - component: {fileID: 1551877173}
+  - component: {fileID: 1551877175}
+  - component: {fileID: 1551877174}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -2605,13 +2607,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89bb4942c1f95394cb1bd185181f7928, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 10
   GroundCheckRadius: 0.2
-  JumpForce: 2.5
   GroundCheckObject: {fileID: 108675943}
   WhatIsGroud:
     serializedVersion: 2
     m_Bits: 128
+  Controller: {fileID: 1551877175}
+--- !u!114 &1551877174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1551877168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bcd996f6180c4a49905856aeadd7fda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GravityScale: 3
+  FallGravityMultiplier: 3
+  JumpForce: 6
+  Speed: 10
+--- !u!114 &1551877175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1551877168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccd50c2cd6372ac45a1dba73be646ae4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Data: {fileID: 1551877174}
 --- !u!1 &1664482406
 GameObject:
   m_ObjectHideFlags: 0
