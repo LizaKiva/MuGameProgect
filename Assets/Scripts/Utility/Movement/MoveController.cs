@@ -32,7 +32,7 @@ public class MoveController : MonoBehaviour
     public void Run(float speedCoeficient)
     {
         // Проверяем, что персонаж хочет изменить направление движения
-        if ((speedCoeficient > 0) == (!isFacingRight))
+        if ((speedCoeficient != 0) && ((speedCoeficient > 0) == (!isFacingRight)))
         {
             Flip();
         }
@@ -42,7 +42,10 @@ public class MoveController : MonoBehaviour
 
     public void Jump()
     {
-        // Просто прыжок, Impulse для создания мгновенной силы
+        // Убираем вертикальную скорость, чтобы прыжок был всегда одинаковой силы
+        rigidbody.velocity = new Vector2(rigidbody.velocity.x, 0);
+
+        // Сам прыжок, Impulse для создания мгновенной силы
         rigidbody.AddForce(Vector2.up * Data.JumpForce, ForceMode2D.Impulse);
     }
 
