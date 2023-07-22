@@ -2626,8 +2626,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GravityScale: 3
-  FallGravityMultiplier: 3
-  JumpForce: 6
+  FallGravityMultiplier: 2
+  JumpForce: 12
   Speed: 10
 --- !u!114 &1551877175
 MonoBehaviour:
