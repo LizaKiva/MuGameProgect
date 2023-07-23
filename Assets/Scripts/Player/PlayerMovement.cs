@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] float GroundCheckRadius;
-    [SerializeField] Transform GroundCheckObject;
-    [SerializeField] LayerMask WhatIsGroud;
-    [SerializeField] MoveController Controller;
+    [SerializeField] int ExtraJumps;              // Количество дополнительных прыжков
+    [SerializeField] float RetryTime;             // Время попыток прыгать после нажатия прыжка
+    [SerializeField] float CoyoteTime;            // Время в течение которого после покидания земли можно прыгать
+    [SerializeField] float GroundCheckRadius;     // Размер круга проверяющего стояние на земле
+    [SerializeField] Transform GroundCheckObject; // Объект проверяющий что игрок стоит на земле
+    [SerializeField] LayerMask WhatIsGroud;       // Слой земли
+    [SerializeField] MoveController Controller;   // Контроллер отвечающий за движение
 
+    int jumpsLeft = 0;
+    float jumpRetryTimer;
+    float timeSinceLastGrounded = 0;
     float horisontalMove = 0;
     bool isGrounded = false;
     Rigidbody2D rigidbody;
-    
+
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
@@ -20,7 +26,27 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (isGrounded)
+        {
+            timeSinceLastGrounded = 0;
+        }
+        else
+        {
+            timeSinceLastGrounded += Time.deltaTime;
+        }
+
         horisontalMove = Input.GetAxis("Horizontal");
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            jumpRetryTimer = RetryTime;
+        }
+
+        if (jumpRetryTimer > 0)
+        {
+            jumpRetryTimer -= Time.deltaTime;
+            TryJump();
+        }
     }
 
     void FixedUpdate()
@@ -28,12 +54,23 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = Physics2D.OverlapCircle(GroundCheckObject.position, GroundCheckRadius, WhatIsGroud);
 
         Controller.Run(horisontalMove);
-        //rigidbody.velocity = new Vector2(horisontalMove * Speed, rigidbody.velocity.y);
+    }
 
-        if(Input.GetKey(KeyCode.Space) && isGrounded)
+    bool TryJump()
+    {
+        if (isGrounded || timeSinceLastGrounded < CoyoteTime)
         {
-            //rigidbody.velocity += Vector2.up * JumpForce;
             Controller.Jump();
+            jumpsLeft = ExtraJumps;
+            return true;
         }
+        else if (jumpsLeft > 0)
+        {
+            Controller.Jump();
+            jumpsLeft--;
+            return true;
+        }
+
+        return false;
     }
 }

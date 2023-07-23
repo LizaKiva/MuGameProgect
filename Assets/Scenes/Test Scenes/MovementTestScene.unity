@@ -474,6 +474,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89bb4942c1f95394cb1bd185181f7928, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ExtraJumps: 1
+  RetryTime: 0.1
+  CoyoteTime: 0.1
   GroundCheckRadius: 0.2
   GroundCheckObject: {fileID: 744275317}
   WhatIsGroud:
