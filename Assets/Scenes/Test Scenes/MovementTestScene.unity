@@ -476,6 +476,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ExtraJumps: 1
   RetryTime: 0.1
+  JumpCooldownTime: 0.05
   CoyoteTime: 0.1
   GroundCheckRadius: 0.2
   GroundCheckObject: {fileID: 744275317}

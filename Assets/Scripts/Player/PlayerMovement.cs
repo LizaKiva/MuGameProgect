@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] int ExtraJumps;              // Количество дополнительных прыжков
     [SerializeField] float RetryTime;             // Время попыток прыгать после нажатия прыжка
+    [SerializeField] float JumpCooldownTime;      // Время перезарядки прыжка
     [SerializeField] float CoyoteTime;            // Время в течение которого после покидания земли можно прыгать
     [SerializeField] float GroundCheckRadius;     // Размер круга проверяющего стояние на земле
     [SerializeField] Transform GroundCheckObject; // Объект проверяющий что игрок стоит на земле
@@ -13,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] MoveController Controller;   // Контроллер отвечающий за движение
 
     int jumpsLeft = 0;
+    float jumpCooldown = 0;
     float jumpRetryTimer;
     float timeSinceLastGrounded = 0;
     float horisontalMove = 0;
@@ -26,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        jumpCooldown -= Time.deltaTime;
+
         if (isGrounded)
         {
             timeSinceLastGrounded = 0;
@@ -58,17 +62,22 @@ public class PlayerMovement : MonoBehaviour
 
     bool TryJump()
     {
-        if (isGrounded || timeSinceLastGrounded < CoyoteTime)
+        if (jumpCooldown <= 0)
         {
-            Controller.Jump();
-            jumpsLeft = ExtraJumps;
-            return true;
-        }
-        else if (jumpsLeft > 0)
-        {
-            Controller.Jump();
-            jumpsLeft--;
-            return true;
+            if (isGrounded || timeSinceLastGrounded < CoyoteTime)
+            {
+                Controller.Jump();
+                jumpsLeft = ExtraJumps;
+                jumpCooldown = JumpCooldownTime;
+                return true;
+            }
+            else if (jumpsLeft > 0)
+            {
+                Controller.Jump();
+                jumpsLeft--;
+                jumpCooldown = JumpCooldownTime;
+                return true;
+            }
         }
 
         return false;
