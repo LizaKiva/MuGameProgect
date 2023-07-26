@@ -51,7 +51,7 @@ public class HealthComponent : MonoBehaviour
         {
             currentHealth -= damage;
             healthNotifier?.Invoke(currentHealth, MaxHealth);
-            if (currentHealth < 0)
+            if (currentHealth <= 0)
             {
                 Died();
             }
