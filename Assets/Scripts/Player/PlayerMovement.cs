@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     int jumpsLeft = 0;
     float jumpCooldown = 0;
     float jumpRetryTimer;
-    float timeSinceLastGrounded = 0;
+    float timeSinceLastGrounded = 0; 
     float horisontalMove = 0;
     bool isGrounded = false;
     Rigidbody2D rigidbody;
