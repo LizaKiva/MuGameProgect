@@ -13,23 +13,26 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] LayerMask WhatIsGroud;       // Слой земли
     [SerializeField] MoveController Controller;   // Контроллер отвечающий за движение
 
-    int jumpsLeft = 0;
-    float jumpCooldown = 0;
-    float jumpRetryTimer;
-    float timeSinceLastGrounded = 0; 
-    float horisontalMove = 0;
-    bool isGrounded = false;
-    Rigidbody2D rigidbody;
+    int jumpsLeft = 0;               // Сколько прыжков до касания земли ещё можно сделать
+    float jumpCooldown = 0;          // Сколько секунд ещё нельзя прыгать
+    float jumpRetryTimer;            // Сколько секунд ещё персонаж будет пытаться выполнить прыжок
+    float timeSinceLastGrounded = 0; // Сколько секунд прошло с последнего касания земли
+    float horisontalMove = 0;        // Input игрока по горизонтали
+    bool isGrounded = false;         // Находится ли сейчас игрок на земле
+    Rigidbody2D rigidbody;           // Компонент Rigidbody игрока
 
     void Start()
     {
+        // Инициализация Rigidbody
         rigidbody = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
+        // Уменьшение кулдауна прыжка (может уйти меньше 0)
         jumpCooldown -= Time.deltaTime;
 
+        // Обновление timeSinceLastGrounded
         if (isGrounded)
         {
             timeSinceLastGrounded = 0;
@@ -39,13 +42,16 @@ public class PlayerMovement : MonoBehaviour
             timeSinceLastGrounded += Time.deltaTime;
         }
 
+        // Получение нажатия игрока по горизонтали
         horisontalMove = Input.GetAxis("Horizontal");
 
+        // Проверяем, пытается ли игрок прыгнуть
         if (Input.GetKeyDown(KeyCode.Space))
         {
             jumpRetryTimer = RetryTime;
         }
 
+        // Проверяем хотим ли мы попа=ытаться прыгнуть и пытаемся
         if (jumpRetryTimer > 0)
         {
             jumpRetryTimer -= Time.deltaTime;
@@ -55,17 +61,22 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        // Обновляем, на земле ли персонаж
         isGrounded = Physics2D.OverlapCircle(GroundCheckObject.position, GroundCheckRadius, WhatIsGroud);
 
+        // Запускаем бег игрока
         Controller.Run(horisontalMove);
     }
 
     bool TryJump()
     {
+        // Проверяем что можем прыгнуть (кулдаун)
         if (jumpCooldown <= 0)
         {
             if (isGrounded || timeSinceLastGrounded < CoyoteTime)
             {
+                // Проверяем, что он на земле, или недавно её покинул
+                // Тогда обновляем все нужные параметры
                 Controller.Jump();
                 jumpsLeft = ExtraJumps;
                 jumpCooldown = JumpCooldownTime;
@@ -73,6 +84,8 @@ public class PlayerMovement : MonoBehaviour
             }
             else if (jumpsLeft > 0)
             {
+                // Проверяем, что раз мы не можем прыгнуть от земли, у нас ещё есть лишние прыжки
+                // Тогда обновляем все нужные параметры
                 Controller.Jump();
                 jumpsLeft--;
                 jumpCooldown = JumpCooldownTime;
