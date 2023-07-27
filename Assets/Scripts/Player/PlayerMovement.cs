@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] int ExtraJumps;              // Количество дополнительных прыжков
+    [SerializeField] float GigaJumpTime;          // Время позволяющее увеличивать прыжек зажатием пробела
     [SerializeField] float RetryTime;             // Время попыток прыгать после нажатия прыжка
     [SerializeField] float JumpCooldownTime;      // Время перезарядки прыжка
     [SerializeField] float CoyoteTime;            // Время в течение которого после покидания земли можно прыгать
@@ -14,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] MoveController Controller;   // Контроллер отвечающий за движение
 
     int jumpsLeft = 0;               // Сколько прыжков до касания земли ещё можно сделать
+    float gigaJumpTimer = 0;         // Сколько ещё секунд можно увеличивать прыжек зажатием прыжка
     float jumpCooldown = 0;          // Сколько секунд ещё нельзя прыгать
     float jumpRetryTimer;            // Сколько секунд ещё персонаж будет пытаться выполнить прыжок
     float timeSinceLastGrounded = 0; // Сколько секунд прошло с последнего касания земли
@@ -32,6 +34,9 @@ public class PlayerMovement : MonoBehaviour
         // Уменьшение кулдауна прыжка (может уйти меньше 0)
         jumpCooldown -= Time.deltaTime;
 
+        // Уменьшение времени возможности увеличивать прыжок
+        gigaJumpTimer -= Time.deltaTime;
+
         // Обновление timeSinceLastGrounded
         if (isGrounded)
         {
@@ -49,6 +54,24 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             jumpRetryTimer = RetryTime;
+        }
+
+        // Проверяем, что игрок может увеличить прыжок
+        if (gigaJumpTimer > 0)
+        {
+            // Проверяем, что игрок хочет увеличить прыжок
+            if (Input.GetKey(KeyCode.Space))
+            {
+                // Прыгаем и обновим кулдаун
+                Controller.Jump();
+                jumpCooldown = JumpCooldownTime;
+            }
+            else
+            {
+                // Больше прыжок увеличивать нельзя и останавливаем прыжок
+                Controller.CutJump();
+                gigaJumpTimer = 0;
+            }
         }
 
         // Проверяем хотим ли мы попа=ытаться прыгнуть и пытаемся
@@ -80,6 +103,7 @@ public class PlayerMovement : MonoBehaviour
                 Controller.Jump();
                 jumpsLeft = ExtraJumps;
                 jumpCooldown = JumpCooldownTime;
+                gigaJumpTimer = GigaJumpTime;
                 return true;
             }
             else if (jumpsLeft > 0)
@@ -89,6 +113,7 @@ public class PlayerMovement : MonoBehaviour
                 Controller.Jump();
                 jumpsLeft--;
                 jumpCooldown = JumpCooldownTime;
+                gigaJumpTimer = GigaJumpTime;
                 return true;
             }
         }

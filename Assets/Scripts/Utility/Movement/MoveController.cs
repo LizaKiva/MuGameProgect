@@ -7,8 +7,9 @@ public class MoveController : MonoBehaviour
 {
     [SerializeField] private MoveData Data;
 
-    Rigidbody2D rigidbody;
-    bool isFacingRight = true;
+    Rigidbody2D rigidbody;     // Компонент Rigidbody игрока
+    bool isFacingRight = true; // Смотрит ли персонаж направо
+    bool wasJumpCut = false;   // Была ли команда прерывать прыжок
 
     void Start()
     {
@@ -18,14 +19,28 @@ public class MoveController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Падения быстрее чем полет вверх, для этого если мы падает увеличиваем гравитацию
-        if (rigidbody.velocity.y < 0)
+        // Если мы хотим прервать прыжок, мы увеличим гравитацию, и это быстрее его остановит
+        if (wasJumpCut)
         {
             SetGravityScale(Data.GravityScale * Data.FallGravityMultiplier);
+
+            // Мы уже падаем, прыжка больше нет
+            if (rigidbody.velocity.y < 0)
+            {
+                wasJumpCut = false;
+            }
         }
         else
         {
-            SetGravityScale(Data.GravityScale);
+            // Падения быстрее чем полет вверх, для этого если мы падает увеличиваем гравитацию
+            if (rigidbody.velocity.y < 0)
+            {
+                SetGravityScale(Data.GravityScale * Data.FallGravityMultiplier);
+            }
+            else
+            {
+                SetGravityScale(Data.GravityScale);
+            }
         }
     }
 
@@ -40,6 +55,12 @@ public class MoveController : MonoBehaviour
         rigidbody.velocity = new Vector2(speedCoeficient * Data.Speed, rigidbody.velocity.y);
     }
 
+    public void CutJump()
+    {
+        // Просто говорим, что прыжок был остановлен
+        wasJumpCut = true;
+    }
+
     public void Jump()
     {
         // Убираем вертикальную скорость, чтобы прыжок был всегда одинаковой силы
@@ -47,6 +68,9 @@ public class MoveController : MonoBehaviour
 
         // Сам прыжок, Impulse для создания мгновенной силы
         rigidbody.AddForce(Vector2.up * Data.JumpForce, ForceMode2D.Impulse);
+
+        // Только прыгнули, пыжок точно не остановлен
+        wasJumpCut = false;
     }
 
     private void Flip()
@@ -56,6 +80,7 @@ public class MoveController : MonoBehaviour
         scale.x *= -1;
         transform.localScale = scale;
 
+        // Теперь он смотрит в другую сторону
         isFacingRight = !isFacingRight;
     }
 
@@ -65,7 +90,3 @@ public class MoveController : MonoBehaviour
         rigidbody.gravityScale = scale;
     }
 }
-
-// TODO:
-// Добавить ускорение при движении и соответственно разделить скорость на ускорение и максСкорость
-// Подумать можно ли соптимизировать смену гравитации
