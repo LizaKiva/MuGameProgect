@@ -792,7 +792,7 @@ GameObject:
   - component: {fileID: 1232637262}
   - component: {fileID: 1232637261}
   m_Layer: 7
-  m_Name: Pillar (1)
+  m_Name: Pillar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
