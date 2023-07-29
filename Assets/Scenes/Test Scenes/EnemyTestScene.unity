@@ -187,6 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ExtraJumps: 1
+  GigaJumpTime: 0
   RetryTime: 0.1
   JumpCooldownTime: 0.05
   CoyoteTime: 0.1
@@ -1325,8 +1326,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'HEALTH: '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 798c38c9e18de2b4b8f3dd6a488bdf18, type: 2}
+  m_sharedMaterial: {fileID: -2459084252783249597, guid: 798c38c9e18de2b4b8f3dd6a488bdf18, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
