@@ -7,15 +7,15 @@ public enum ItemType
 {
     ITEM,
     GOLD,
-    POISON
+    POISON,
+    ORB
 }
 
 [Serializable]
-public class BaseItem
+public class BaseItem : MonoBehaviour
 {
-    private int id;
-    private ItemType type;
-    private string name;
+    [SerializeField] private ItemType type; // Тип предмета
+    [SerializeField] private string name;   // Название предмета
 
     public string GetItemName()
     {
@@ -25,10 +25,5 @@ public class BaseItem
     public ItemType GetItemType()
     {
         return type;
-    }
-
-    public int GetItemId()
-    {
-        return id;
     }
 }
