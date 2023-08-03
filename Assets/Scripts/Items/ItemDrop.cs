@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static LogHandler;
 
 public class ItemDrop : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class ItemDrop : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("I: Picked item");
+            Message(LogCategories.ITEMS, "Picked item: {0}", item);
             inventory.AddItem(item);
             Destroy(this.gameObject);
         }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static LogHandler;
 
 public class PlayerInventory : MonoBehaviour
 {
@@ -28,16 +29,16 @@ public class PlayerInventory : MonoBehaviour
                         blueOrbsCount++;
                         break;
                     default:
-                        Debug.Log("E: Unkwown OrbType!");
+                        Error(LogCategories.ITEMS, "Unkwown OrbType: {0}", (item as OrbItem).GetOrbType());
                         break;
                 }
 
                 // Временный вывод
-                Debug.Log(redOrbsCount + " " + greenOrbsCount + " " + blueOrbsCount);
+                Message(LogCategories.ITEMS, "{0} {1} {2}", redOrbsCount, greenOrbsCount, blueOrbsCount);
                 break;
 
             default:
-                Debug.Log("E: Unkwown ItemType!");
+                Error(LogCategories.ITEMS, "Unkwown ItemType: {0}", item.GetItemType());
                 break;
         }
     }

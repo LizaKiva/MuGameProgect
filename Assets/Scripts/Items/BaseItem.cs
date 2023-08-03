@@ -15,15 +15,20 @@ public enum ItemType
 public class BaseItem : MonoBehaviour
 {
     [SerializeField] private ItemType type; // Тип предмета
-    [SerializeField] private string name;   // Название предмета
+    [SerializeField] private string item_name;   // Название предмета
 
     public string GetItemName()
     {
-        return name;
+        return item_name;
     }
 
     public ItemType GetItemType()
     {
         return type;
+    }
+
+    public override string ToString()
+    {
+        return GetItemName();
     }
 }
