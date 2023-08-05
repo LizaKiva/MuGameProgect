@@ -12,8 +12,9 @@ public class ItemDrop : MonoBehaviour // Класс дропа
     private void Start()
     {
         // Получаем предмет (хочется поменять)
-        // TODO: Сделать получение спрайта по предмету
+        // TODO: Сделать получение спрайта по предметун
         item = GetComponent<BaseItem>();
+        GetComponent<SpriteRenderer>().sprite = item.GetItemImage();
     }
 
     void OnTriggerEnter2D(Collider2D other)
