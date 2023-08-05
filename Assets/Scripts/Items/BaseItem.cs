@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ItemType
+public enum ItemType // Тип предмета, для упрощеной идентификации
 {
     ITEM,
     GOLD,
@@ -12,23 +12,12 @@ public enum ItemType
 }
 
 [Serializable]
-public class BaseItem : MonoBehaviour
+public class BaseItem : MonoBehaviour // Базовый класс предмета
 {
-    [SerializeField] private ItemType type; // Тип предмета
-    [SerializeField] private string item_name;   // Название предмета
+    [SerializeField] private ItemType type;    // Тип предмета
+    [SerializeField] private string item_name; // Название предмета
 
-    public string GetItemName()
-    {
-        return item_name;
-    }
-
-    public ItemType GetItemType()
-    {
-        return type;
-    }
-
-    public override string ToString()
-    {
-        return GetItemName();
-    }
+    public string GetItemName() => item_name;
+    public ItemType GetItemType() => type;
+    public override string ToString() => GetItemName();
 }
